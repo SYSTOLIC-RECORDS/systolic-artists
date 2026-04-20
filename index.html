@@ -18,11 +18,12 @@ html, body {
   height: 100%;
 }
 
+/* Grid 2x2 fijo, sin scroll, cabe en cualquier pantalla */
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 50vh 50vh;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   gap: 2px;
 }
@@ -40,23 +41,23 @@ html, body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 20%;
   z-index: 1;
-  filter: brightness(0.55) saturate(0.25);
+  filter: brightness(0.5) saturate(0.2);
   transition: filter 0.6s ease;
   display: block;
   pointer-events: none;
 }
 .card:hover .card-photo,
 .card.tapped .card-photo {
-  filter: brightness(0.72) saturate(0.6);
+  filter: brightness(0.68) saturate(0.55);
 }
 
 .card-grad {
   position: absolute;
   inset: 0;
   z-index: 2;
-  background: linear-gradient(to bottom, transparent 20%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.92) 100%);
+  background: linear-gradient(to bottom, transparent 25%, rgba(0,0,0,0.4) 55%, rgba(0,0,0,0.9) 100%);
   pointer-events: none;
 }
 
@@ -79,78 +80,47 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: clamp(0.8rem, 2vw, 1.6rem);
+  padding: 0.9rem 1rem;
 }
 
 .card-num {
   font-size: 9px;
   letter-spacing: 0.4em;
-  color: rgba(232,0,13,0.25);
+  color: rgba(232,0,13,0.3);
   margin-bottom: auto;
-  transition: color 0.3s;
 }
-.card:hover .card-num,
-.card.tapped .card-num { color: rgba(232,0,13,0.7); }
 
 .card-role {
-  font-size: 9px;
-  letter-spacing: 0.35em;
+  font-size: 8px;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--red);
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
   opacity: 0;
-  transform: translateY(4px);
-  transition: opacity 0.35s, transform 0.35s;
+  transform: translateY(3px);
+  transition: opacity 0.3s, transform 0.3s;
 }
 .card:hover .card-role,
 .card.tapped .card-role { opacity: 1; transform: translateY(0); }
 
 .card-name {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(26px, 4.5vw, 58px);
-  line-height: 0.88;
+  font-size: clamp(22px, 5.5vw, 48px);
+  line-height: 1;
   color: var(--white);
-  letter-spacing: 0.03em;
+  letter-spacing: 0.02em;
   transition: color 0.4s;
 }
 .card:hover .card-name,
 .card.tapped .card-name { color: var(--red); }
 
 .card-genre {
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(240,237,232,0.22);
-  margin-top: 0.35rem;
-  transition: color 0.3s;
-}
-.card:hover .card-genre,
-.card.tapped .card-genre { color: rgba(232,0,13,0.45); }
-
-.card-cta {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
   font-size: 8px;
-  letter-spacing: 0.4em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--red);
-  margin-top: 0.6rem;
-  opacity: 0;
-  transform: translateX(-6px);
-  transition: opacity 0.3s 0.1s, transform 0.3s 0.1s;
+  color: rgba(240,237,232,0.3);
+  margin-top: 0.25rem;
 }
-.card-cta::after {
-  content: '';
-  width: 16px;
-  height: 1px;
-  background: var(--red);
-  transition: width 0.3s;
-}
-.card:hover .card-cta,
-.card.tapped .card-cta { opacity: 1; transform: translateX(0); }
-.card:hover .card-cta::after,
-.card.tapped .card-cta::after { width: 30px; }
 
 /* BIO OVERLAY */
 .bio-overlay {
@@ -224,8 +194,8 @@ html, body {
 }
 .bio-close {
   position: fixed;
-  top: 1.4rem;
-  right: 1.4rem;
+  top: 1.2rem;
+  right: 1.2rem;
   background: none;
   border: 1px solid rgba(240,237,232,0.1);
   color: rgba(240,237,232,0.35);
@@ -252,8 +222,7 @@ html, body {
       <div class="card-num">01</div>
       <div class="card-role">Founder &amp; CEO</div>
       <div class="card-name">GATNAU</div>
-      <div class="card-genre">Schranz  160 BPM  Madrid</div>
-      <div class="card-cta">Profile</div>
+      <div class="card-genre">Schranz · 160 BPM · Madrid</div>
     </div>
   </div>
 
@@ -264,8 +233,7 @@ html, body {
       <div class="card-num">02</div>
       <div class="card-role">A&amp;R / Label Manager</div>
       <div class="card-name">DREY</div>
-      <div class="card-genre">Hard Techno  Schranz  Madrid</div>
-      <div class="card-cta">Profile</div>
+      <div class="card-genre">Hard Techno · Schranz · Madrid</div>
     </div>
   </div>
 
@@ -276,8 +244,7 @@ html, body {
       <div class="card-num">03</div>
       <div class="card-role">Artist</div>
       <div class="card-name">TERI MAKASIH</div>
-      <div class="card-genre">Hardcore  Industrial  Madrid</div>
-      <div class="card-cta">Profile</div>
+      <div class="card-genre">Hardcore · Industrial · Madrid</div>
     </div>
   </div>
 
@@ -288,8 +255,7 @@ html, body {
       <div class="card-num">04</div>
       <div class="card-role">Artist</div>
       <div class="card-name">WHITE SPIRIT</div>
-      <div class="card-genre">Schranz  Netherlands</div>
-      <div class="card-cta">Profile</div>
+      <div class="card-genre">Schranz · Netherlands</div>
     </div>
   </div>
 
