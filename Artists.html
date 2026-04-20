@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Systolic Records — Artists</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --red: #e8000d;
+  --crimson: #8b0000;
+  --black: #000;
+  --white: #f0ede8;
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ── HERO ─────────────────────────────────────── */
+.hero {
+  padding: clamp(5rem,12vw,10rem) clamp(2rem,6vw,6rem) clamp(3rem,6vw,5rem);
+}
+
+.hero-label {
+  font-size: 13px;
+  letter-spacing: 0.55em;
+  text-transform: uppercase;
+  color: rgba(232,0,13,0.6);
+  margin-bottom: 2.2rem;
+}
+
+.hero-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(22px, 3vw, 42px);
+  line-height: 1;
+  letter-spacing: 0.08em;
+  color: rgba(240,237,232,0.35);
+  font-weight: 400;
+}
+
+.hero-headline .hn-white { color: rgba(240,237,232,0.9); }
+.hero-headline .hn-red { color: var(--red); }
+
+.hero-sub {
+  margin-top: 2.5rem;
+  font-size: clamp(14px, 1.45vw, 17px);
+  font-weight: 300;
+  line-height: 1.72;
+  color: rgba(240,237,232,0.55);
+  max-width: 560px;
+}
+
+/* ── GRID ─────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: min(52vw, 660px) min(52vw, 660px);
+  gap: 2px;
+  margin-top: 2px;
+}
+
+/* ── CARD ─────────────────────────────────────── */
+.card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  background: #060606;
+}
+
+.card-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  z-index: 1;
+  filter: brightness(0.43) saturate(0.2);
+  transition: filter 0.6s ease;
+  display: block;
+  pointer-events: none;
+}
+.card:hover .card-photo {
+  filter: brightness(0.65) saturate(0.55);
+}
+
+/* Bottom gradient */
+.card-grad {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    transparent 30%,
+    rgba(0,0,0,0.45) 60%,
+    rgba(0,0,0,0.88) 100%
+  );
+  pointer-events: none;
+}
+
+/* Hover border */
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid transparent;
+  z-index: 10;
+  pointer-events: none;
+  transition: border-color 0.5s;
+}
+.card:hover::after { border-color: rgba(232,0,13,0.5); }
+
+/* Card text */
+.card-inner {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(1.4rem, 2.5vw, 2.2rem);
+}
+
+.card-num {
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  color: rgba(232,0,13,0.2);
+  margin-bottom: auto;
+  transition: color 0.3s;
+}
+.card:hover .card-num { color: rgba(232,0,13,0.6); }
+
+.card-role {
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 0.4rem;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.35s, transform 0.35s;
+}
+.card:hover .card-role { opacity: 1; transform: translateY(0); }
+
+.card-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 0.88;
+  color: var(--white);
+  letter-spacing: 0.03em;
+  transition: color 0.4s;
+}
+.card:hover .card-name { color: var(--red); }
+
+.card-genre {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(240,237,232,0.2);
+  margin-top: 0.55rem;
+  transition: color 0.3s;
+}
+.card:hover .card-genre { color: rgba(232,0,13,0.4); }
+
+.card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-top: 1rem;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.3s 0.1s, transform 0.3s 0.1s;
+}
+.card-cta::after {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--red);
+  transition: width 0.3s;
+}
+.card:hover .card-cta { opacity: 1; transform: translateX(0); }
+.card:hover .card-cta::after { width: 38px; }
+
+/* ── BIO OVERLAY ──────────────────────────────── */
+.bio-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0,0,0,0.96);
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+.bio-overlay.open { opacity: 1; pointer-events: all; }
+
+.bio-panel {
+  width: min(680px, 90vw);
+  max-height: 88vh;
+  overflow-y: auto;
+  padding: 3rem clamp(1.5rem,5vw,3.5rem);
+  border-left: 2px solid var(--red);
+  scrollbar-width: thin;
+  scrollbar-color: var(--crimson) transparent;
+}
+.bio-panel::-webkit-scrollbar { width: 3px; }
+.bio-panel::-webkit-scrollbar-thumb { background: var(--crimson); }
+
+.bio-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 8vw, 80px);
+  line-height: 0.9;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+}
+.bio-role {
+  font-size: 10px;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 2rem;
+}
+.bio-body p {
+  font-size: clamp(14px, 1.7vw, 16px);
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(240,237,232,0.65);
+  margin-bottom: 1.1rem;
+}
+.bio-quote {
+  font-size: clamp(15px, 1.8vw, 18px);
+  font-style: italic;
+  color: var(--red);
+  font-weight: 300;
+  margin-top: 1.8rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(232,0,13,0.15);
+}
+.bio-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1.6rem;
+}
+.bio-tag {
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  border: 1px solid rgba(232,0,13,0.2);
+  color: rgba(232,0,13,0.5);
+  padding: 0.3rem 0.65rem;
+}
+.bio-close {
+  position: fixed;
+  top: 1.8rem;
+  right: 2rem;
+  background: none;
+  border: 1px solid rgba(240,237,232,0.1);
+  color: rgba(240,237,232,0.35);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  padding: 0.5rem 1rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s;
+  z-index: 201;
+}
+.bio-close:hover { border-color: var(--red); color: var(--red); }
+
+/* ── TWEAKS ───────────────────────────────────── */
+.tweaks-panel {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: rgba(4,4,4,0.97);
+  border: 1px solid rgba(232,0,13,0.18);
+  padding: 1.2rem 1.4rem;
+  z-index: 300;
+  width: 210px;
+  display: none;
+  font-family: 'Barlow Condensed', sans-serif;
+}
+.tweaks-panel.visible { display: block; }
+.tweaks-title {
+  font-size: 9px;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(232,0,13,0.1);
+}
+.tweak-row { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.9rem; }
+.tweak-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(240,237,232,0.3); }
+.tweak-row input[type=range] { width: 100%; accent-color: var(--red); cursor: pointer; }
+.tweak-row select {
+  background: #0e0e0e;
+  border: 1px solid rgba(232,0,13,0.15);
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  padding: 0.3rem 0.5rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; grid-template-rows: repeat(4, 80vw); }
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-label">Systolic Records   Artists</div>
+  <h1 class="hero-headline"><span class="hn-white">The Next</span><br><span class="hn-red">Generation</span></h1>
+  <p class="hero-sub" id="hero-sub">Four artists shaped by the underground. Each one a different origin, a different sound — but the same refusal to compromise. Between them they cover the full spectrum of hard electronic music: from the hypnotic pressure of Schranz to the raw impact of Hardcore, from the grooves of Hard Techno to melodic intensity. What unites them is not a genre. It's a conviction.</p>
+</section>
+
+<section>
+  <div class="grid">
+
+    <div class="card" data-artist="gatnau">
+      <img class="card-photo" src="uploads/GATNAU .jpg" alt="Gatnau" draggable="false">
+      <div class="card-grad"></div>
+      <div class="card-inner">
+        <div class="card-num">01</div>
+        <div class="card-role">Founder &amp; CEO</div>
+        <div class="card-name">GATNAU</div>
+        <div class="card-genre">Schranz  160 BPM  Madrid</div>
+        <div class="card-cta">Profile</div>
+      </div>
+    </div>
+
+    <div class="card" data-artist="drey">
+      <img class="card-photo" src="uploads/DREY.png" alt="Drey" draggable="false">
+      <div class="card-grad"></div>
+      <div class="card-inner">
+        <div class="card-num">02</div>
+        <div class="card-role">A&amp;R / Label Manager</div>
+        <div class="card-name">DREY</div>
+        <div class="card-genre">Hard Techno  Schranz  Madrid</div>
+        <div class="card-cta">Profile</div>
+      </div>
+    </div>
+
+    <div class="card" data-artist="teri">
+      <img class="card-photo" src="uploads/TERI MAKASIH.png" alt="Teri Makasih" draggable="false">
+      <div class="card-grad"></div>
+      <div class="card-inner">
+        <div class="card-num">03</div>
+        <div class="card-role">Artist</div>
+        <div class="card-name">TERI MAKASIH</div>
+        <div class="card-genre">Hardcore  Industrial  Madrid</div>
+        <div class="card-cta">Profile</div>
+      </div>
+    </div>
+
+    <div class="card" data-artist="whitespirit">
+      <img class="card-photo" src="uploads/WHITE.png" alt="White Spirit" draggable="false">
+      <div class="card-grad"></div>
+      <div class="card-inner">
+        <div class="card-num">04</div>
+        <div class="card-role">Artist</div>
+        <div class="card-name">WHITE SPIRIT</div>
+        <div class="card-genre">Schranz  Netherlands</div>
+        <div class="card-cta">Profile</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div id="bio-overlay" class="bio-overlay">
+  <button class="bio-close" id="bio-close">✕ &nbsp;Close</button>
+  <div class="bio-panel">
+    <div class="bio-name" id="bio-name"></div>
+    <div class="bio-role" id="bio-role"></div>
+    <div class="bio-body" id="bio-body"></div>
+    <div class="bio-quote" id="bio-quote"></div>
+    <div class="bio-tags" id="bio-tags"></div>
+  </div>
+</div>
+
+<div class="tweaks-panel" id="tweaks-panel">
+  <div class="tweaks-title">Tweaks</div>
+  <div class="tweak-row">
+    <label class="tweak-label">Photo Brightness</label>
+    <input type="range" id="tw-bright" min="0.05" max="0.7" step="0.01" value="0.43">
+  </div>
+  <div class="tweak-row">
+    <label class="tweak-label">Card Height</label>
+    <select id="tw-height">
+      <option value="compact">Compact</option>
+      <option value="medium" selected>Medium</option>
+      <option value="tall">Tall</option>
+    </select>
+  </div>
+  <div class="tweak-row">
+    <label class="tweak-label">Hero Size</label>
+    <select id="tw-hero">
+      <option value="sm">Small</option>
+      <option value="md" selected>Medium</option>
+      <option value="lg">Large</option>
+    </select>
+  </div>
+</div>
+
+<script>
+const ARTISTS = {
+  gatnau: {
+    name: 'GATNAU', role: 'Founder & CEO — Systolic Records',
+    bio: ['Based in Madrid, he is the creator and driving force behind Systolic Records — a project born from the need to push beyond the boundaries of conventional hard techno.',
+          'His natural territory: Schranz at 160 BPM. Kick drums, rhythmic pressure, hypnosis. His musical narrative is built on gradual aggression — from subtle intensity to total release.',
+          'His track "Testing" reached the Beatport Top 100. Throughout 2026, a massive wave of exclusive content — sets loaded with unreleased tracks and a direct connection with the dancefloor.'],
+    quote: '"Gatnau doesn\'t follow trends. He creates them."',
+    tags: ['Schranz', '160 BPM', 'Madrid', 'Beatport Top 100']
+  },
+  drey: {
+    name: 'DREY', role: 'A&R / Label Manager — Systolic Records',
+    bio: ['Madrid-based DJ and producer. In just a few years he established himself on the European circuit with support from Luciid, Shlømo, Vendex, and Svetec.',
+          'Releases on Mad Made, Darkground, DSR Digital, Kube Records — repeatedly reaching the Beatport Top 10. Label Manager at Systolic Records since 2024.',
+          'On stage at Fabrik, Sala Sonora, Marmarela, Dvrk Sun, Verknipt Portugal, Komplex. Hard Techno, groove, and old-school Schranz — raw and unapologetically powerful.'],
+    quote: '"Raw, emotional, unapologetically powerful."',
+    tags: ['Hard Techno', 'Schranz', 'Madrid', 'Beatport Top 10', 'Fabrik']
+  },
+  teri: {
+    name: 'TERI MAKASIH', role: 'Artist — Hardcore / Schranz / Hard Techno',
+    bio: ['DJ and producer based in Madrid. She began her journey in 2018 in Bali, Indonesia — the birthplace of her artistic name. Quickly earned a place among Madrid\'s most recognized emerging talents.',
+          'International expansion since 2022 across Spain, Portugal, Italy, Belgium, and UAE. Stages shared with Fernanda Martins, Under Black Helmet, Perc, and others.',
+          'Current project: Hard Industrial, Rawstyle, Hardstyle, Hardcore, Metalcore, and Rap fused into a boundary-defying sound. Art that transcends trends.'],
+    quote: '"The only true limits are those we impose on ourselves."',
+    tags: ['Hardcore', 'Industrial', 'Hardstyle', 'Madrid', 'Bali', 'Concrete Berlin']
+  },
+  whitespirit: {
+    name: 'WHITE SPIRIT', role: 'Artist — Schranz',
+    bio: ['DJ and producer based in the Netherlands. Old-school Schranz elements fused with modern production — always leaving room for melody and catchy detail.',
+          'Rather than following a fixed formula, White Spirit gives Schranz his own twist — balancing raw energy with musical expression.',
+          'Being part of Systolic Records is meaningful to him. A place where he felt understood and found people who believe in his sound.'],
+    quote: '"Where creativity, intensity and melody converge."',
+    tags: ['Schranz', 'Netherlands', 'Old-school', 'Melodic']
+  }
+};
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "photoBrightness": 0.7,
+  "cardHeight": "medium",
+  "heroSize": "lg"
+}/*EDITMODE-END*/;
+let cfg = { ...TWEAK_DEFAULTS };
+
+// Cards
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('click', () => openBio(card.dataset.artist));
+});
+
+// Bio
+const overlay = document.getElementById('bio-overlay');
+document.getElementById('bio-close').addEventListener('click', closeBio);
+overlay.addEventListener('click', e => { if (e.target === overlay) closeBio(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBio(); });
+
+function openBio(id) {
+  const a = ARTISTS[id]; if (!a) return;
+  document.getElementById('bio-name').textContent = a.name;
+  document.getElementById('bio-role').textContent = a.role;
+  document.getElementById('bio-body').innerHTML = a.bio.map(p => `<p>${p}</p>`).join('');
+  document.getElementById('bio-quote').textContent = a.quote;
+  document.getElementById('bio-tags').innerHTML = a.tags.map(t => `<span class="bio-tag">${t}</span>`).join('');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeBio() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Glitch intro
+(function() {
+  const el = document.getElementById('hero-sub');
+  const orig = el.textContent.trim();
+  const CH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@!%';
+  let rev = 0; el.textContent = '';
+  function tick() {
+    if (rev >= orig.length) { el.textContent = orig; return; }
+    let s = orig.slice(0, rev);
+    for (let i = 0; i < Math.min(4, orig.length - rev); i++)
+      s += Math.random() > 0.4 ? CH[Math.floor(Math.random() * CH.length)] : (orig[rev+i] || '');
+    el.textContent = s; rev += 2; setTimeout(tick, 22);
+  }
+  const obs = new IntersectionObserver(e => { if (e[0].isIntersecting) { obs.disconnect(); setTimeout(tick, 400); }}, { threshold: 0.2 });
+  obs.observe(el);
+})();
+
+// Tweaks
+const tweaksPanel = document.getElementById('tweaks-panel');
+window.addEventListener('message', e => {
+  if (e.data?.type === '__activate_edit_mode')   tweaksPanel.classList.add('visible');
+  if (e.data?.type === '__deactivate_edit_mode') tweaksPanel.classList.remove('visible');
+});
+window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+function dynStyle(id, css) {
+  let s = document.getElementById(id);
+  if (!s) { s = document.createElement('style'); s.id = id; document.head.appendChild(s); }
+  s.textContent = css;
+}
+
+function applyBrightness(v) {
+  const hv = Math.min(0.75, v * 1.6);
+  dynStyle('dyn-b', `.card-photo{filter:brightness(${v}) saturate(0.2)!important}.card:hover .card-photo{filter:brightness(${hv}) saturate(0.6)!important}`);
+}
+
+function applyCardHeight(v) {
+  const m = { compact: '38vw', medium: '52vw', tall: '65vw' };
+  const val = `min(${m[v]||'52vw'}, 660px)`;
+  dynStyle('dyn-h', `.grid{grid-template-rows:${val} ${val}!important}`);
+}
+
+function applyHeroSize(v) {
+  const m = { sm: 'clamp(16px,2vw,26px)', md: 'clamp(22px,3vw,42px)', lg: 'clamp(30px,4.5vw,60px)' };
+  dynStyle('dyn-hs', `.hero-headline{font-size:${m[v]||m.md}!important}`);
+}
+
+function pushTweaks() {
+  window.parent.postMessage({ type: '__edit_mode_set_keys', edits: {
+    photoBrightness: cfg.photoBrightness, cardHeight: cfg.cardHeight, heroSize: cfg.heroSize
+  }}, '*');
+}
+
+document.getElementById('tw-bright').addEventListener('input', function() {
+  cfg.photoBrightness = +this.value; applyBrightness(cfg.photoBrightness); pushTweaks();
+});
+document.getElementById('tw-height').addEventListener('change', function() {
+  cfg.cardHeight = this.value; applyCardHeight(cfg.cardHeight); pushTweaks();
+});
+document.getElementById('tw-hero').addEventListener('change', function() {
+  cfg.heroSize = this.value; applyHeroSize(cfg.heroSize); pushTweaks();
+});
+
+document.getElementById('tw-bright').value = cfg.photoBrightness;
+document.getElementById('tw-height').value = cfg.cardHeight;
+document.getElementById('tw-hero').value = cfg.heroSize;
+applyBrightness(cfg.photoBrightness);
+applyCardHeight(cfg.cardHeight);
+applyHeroSize(cfg.heroSize);
+</script>
+</body>
+</html>
