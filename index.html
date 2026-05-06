@@ -151,10 +151,17 @@ html, body {
   margin-bottom: 0.4rem;
 }
 .bio-role {
-  font-size: 10px;
-  letter-spacing: 0.5em;
+  font-size: 9px;
+  letter-spacing: 0.45em;
   text-transform: uppercase;
-  color: var(--red);
+  color: rgba(232,0,13,0.5);
+  margin-bottom: 0.4rem;
+}
+.bio-genre {
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: rgba(240,237,232,0.45);
   margin-bottom: 2rem;
 }
 .bio-body p {
@@ -252,6 +259,7 @@ html, body {
   <div class="bio-panel">
     <div class="bio-name" id="bio-name"></div>
     <div class="bio-role" id="bio-role"></div>
+    <div class="bio-genre" id="bio-genre"></div>
     <div class="bio-body" id="bio-body"></div>
     <div class="bio-tags" id="bio-tags"></div>
   </div>
@@ -260,28 +268,28 @@ html, body {
 <script>
 const ARTISTS = {
   gatnau: {
-    name: 'GATNAU', role: 'Artist  Systolic Records',
+    name: 'GATNAU', genre: 'Schranz', role: 'Artist',
     bio: ['Based in Madrid, he is the creator and driving force behind Systolic Records, a project born from the need to push beyond the boundaries of conventional hard techno.',
           'His natural territory: Schranz at 160 BPM. Kick drums, rhythmic pressure, hypnosis. His musical narrative is built on gradual aggression, from subtle intensity to total release.',
           'Throughout 2026, a massive wave of exclusive content, sets loaded with unreleased tracks and a direct connection with the dancefloor.'],
     tags: ['Schranz', '160 BPM', 'Madrid', 'Fabrik', 'Code', 'Elrow']
   },
   drey: {
-    name: 'DREY', role: 'Artist  Systolic Records',
+    name: 'DREY', genre: 'Schranz / Hard Techno', role: 'Artist',
     bio: ['Madrid-based DJ and producer. In just a few years he established himself on the European circuit with support from Luciid, Shlømo, Vendex, and Svetec.',
           'Releases on Mad Made, Darkground, DSR Digital, Kube Records.',
           'On stage at Fabrik, Sala Sonora, Marmarela, Dvrk Sun, Verknipt Portugal, Komplex. Hard Techno, groove, and old-school Schranz, raw and unapologetically powerful.'],
     tags: ['Hard Techno', 'Schranz', 'Madrid', 'Fabrik']
   },
   teri: {
-    name: 'TERI MAKASIH', role: 'Artist  Systolic Records',
+    name: 'TERI MAKASIH', genre: 'Hard Industrial / Hardcore', role: 'Artist',
     bio: ['DJ and producer based in Madrid. She began her journey in 2018 in Bali, Indonesia, the birthplace of her artistic name. Quickly earned a place among Madrid\'s most recognized emerging talents.',
           'International expansion since 2022 across Spain, Portugal, Italy, Belgium, and UAE. Stages shared with Fernanda Martins, Under Black Helmet, Perc, and others.',
           'Current project: Hard Industrial, Rawstyle, Hardstyle, Hardcore, Metalcore, and Rap fused into a boundary-defying sound. Art that transcends trends.'],
     tags: ['Hardcore', 'Industrial', 'Hardstyle', 'Madrid', 'Bali', 'Concrete Berlin']
   },
   whitespirit: {
-    name: 'WHITE SPIRIT', role: 'Artist  Systolic Records',
+    name: 'WHITE SPIRIT', genre: 'Emotional / Melodic Schranz', role: 'Artist',
     bio: ['DJ and producer based in the Netherlands. Old-school Schranz elements fused with modern production, always leaving room for melody and catchy detail.',
           'Rather than following a fixed formula, White Spirit gives Schranz his own twist, balancing raw energy with musical expression.',
           'Being part of Systolic Records is meaningful to him. A place where he felt understood and found people who believe in his sound.'],
@@ -305,6 +313,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeBio(); 
 function openBio(id) {
   const a = ARTISTS[id]; if (!a) return;
   document.getElementById('bio-name').textContent = a.name;
+  document.getElementById('bio-genre').textContent = a.genre;
   document.getElementById('bio-role').textContent = a.role;
   document.getElementById('bio-body').innerHTML = a.bio.map(p => '<p>' + p + '</p>').join('');
   document.getElementById('bio-tags').innerHTML = a.tags.map(t => '<span class="bio-tag">' + t + '</span>').join('');
