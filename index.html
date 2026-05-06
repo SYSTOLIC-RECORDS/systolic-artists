@@ -90,19 +90,6 @@ html, body {
   margin-bottom: auto;
 }
 
-.card-role {
-  font-size: 8px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--red);
-  margin-bottom: 0.2rem;
-  opacity: 0;
-  transform: translateY(3px);
-  transition: opacity 0.3s, transform 0.3s;
-}
-.card:hover .card-role,
-.card.tapped .card-role { opacity: 1; transform: translateY(0); }
-
 .card-name {
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(22px, 5.5vw, 48px);
@@ -169,15 +156,6 @@ html, body {
   color: rgba(240,237,232,0.65);
   margin-bottom: 1rem;
 }
-.bio-quote {
-  font-size: clamp(14px, 1.8vw, 17px);
-  font-style: italic;
-  color: var(--red);
-  font-weight: 300;
-  margin-top: 1.6rem;
-  padding-top: 1.4rem;
-  border-top: 1px solid rgba(232,0,13,0.15);
-}
 .bio-tags {
   display: flex;
   flex-wrap: wrap;
@@ -220,9 +198,8 @@ html, body {
     <div class="card-grad"></div>
     <div class="card-inner">
       <div class="card-num">01</div>
-      <div class="card-role">Founder &amp; CEO</div>
       <div class="card-name">GATNAU</div>
-      <div class="card-genre">Schranz · 160 BPM · Madrid</div>
+      <div class="card-genre">Schranz  Madrid</div>
     </div>
   </div>
 
@@ -231,9 +208,8 @@ html, body {
     <div class="card-grad"></div>
     <div class="card-inner">
       <div class="card-num">02</div>
-      <div class="card-role">A&amp;R / Label Manager</div>
       <div class="card-name">DREY</div>
-      <div class="card-genre">Hard Techno · Schranz · Madrid</div>
+      <div class="card-genre">Schranz  Hard Techno  Madrid</div>
     </div>
   </div>
 
@@ -242,9 +218,8 @@ html, body {
     <div class="card-grad"></div>
     <div class="card-inner">
       <div class="card-num">03</div>
-      <div class="card-role">Artist</div>
       <div class="card-name">TERI MAKASIH</div>
-      <div class="card-genre">Hardcore · Industrial · Madrid</div>
+      <div class="card-genre">Hard Industrial  Hardcore  Madrid</div>
     </div>
   </div>
 
@@ -253,9 +228,8 @@ html, body {
     <div class="card-grad"></div>
     <div class="card-inner">
       <div class="card-num">04</div>
-      <div class="card-role">Artist</div>
       <div class="card-name">WHITE SPIRIT</div>
-      <div class="card-genre">Schranz · Netherlands</div>
+      <div class="card-genre">Emotional  Melodic Schranz  Netherlands</div>
     </div>
   </div>
 
@@ -267,7 +241,6 @@ html, body {
     <div class="bio-name" id="bio-name"></div>
     <div class="bio-role" id="bio-role"></div>
     <div class="bio-body" id="bio-body"></div>
-    <div class="bio-quote" id="bio-quote"></div>
     <div class="bio-tags" id="bio-tags"></div>
   </div>
 </div>
@@ -275,35 +248,31 @@ html, body {
 <script>
 const ARTISTS = {
   gatnau: {
-    name: 'GATNAU', role: 'Founder & CEO — Systolic Records',
-    bio: ['Based in Madrid, he is the creator and driving force behind Systolic Records — a project born from the need to push beyond the boundaries of conventional hard techno.',
-          'His natural territory: Schranz at 160 BPM. Kick drums, rhythmic pressure, hypnosis. His musical narrative is built on gradual aggression — from subtle intensity to total release.',
-          'His track "Testing" reached the Beatport Top 100. Throughout 2026, a massive wave of exclusive content — sets loaded with unreleased tracks and a direct connection with the dancefloor.'],
-    quote: '"Gatnau doesn\'t follow trends. He creates them."',
+    name: 'GATNAU', role: 'Artist  Systolic Records',
+    bio: ['Based in Madrid, he is the creator and driving force behind Systolic Records, a project born from the need to push beyond the boundaries of conventional hard techno.',
+          'His natural territory: Schranz at 160 BPM. Kick drums, rhythmic pressure, hypnosis. His musical narrative is built on gradual aggression, from subtle intensity to total release.',
+          'His track "Testing" reached the Beatport Top 100. Throughout 2026, a massive wave of exclusive content, sets loaded with unreleased tracks and a direct connection with the dancefloor.'],
     tags: ['Schranz', '160 BPM', 'Madrid', 'Beatport Top 100']
   },
   drey: {
-    name: 'DREY', role: 'A&R / Label Manager — Systolic Records',
+    name: 'DREY', role: 'Artist  Systolic Records',
     bio: ['Madrid-based DJ and producer. In just a few years he established himself on the European circuit with support from Luciid, Shlømo, Vendex, and Svetec.',
-          'Releases on Mad Made, Darkground, DSR Digital, Kube Records — repeatedly reaching the Beatport Top 10. Label Manager at Systolic Records since 2024.',
-          'On stage at Fabrik, Sala Sonora, Marmarela, Dvrk Sun, Verknipt Portugal, Komplex. Hard Techno, groove, and old-school Schranz — raw and unapologetically powerful.'],
-    quote: '"Raw, emotional, unapologetically powerful."',
+          'Releases on Mad Made, Darkground, DSR Digital, Kube Records, repeatedly reaching the Beatport Top 10. Label Manager at Systolic Records since 2024.',
+          'On stage at Fabrik, Sala Sonora, Marmarela, Dvrk Sun, Verknipt Portugal, Komplex. Hard Techno, groove, and old-school Schranz, raw and unapologetically powerful.'],
     tags: ['Hard Techno', 'Schranz', 'Madrid', 'Beatport Top 10', 'Fabrik']
   },
   teri: {
-    name: 'TERI MAKASIH', role: 'Artist — Hardcore / Schranz / Hard Techno',
-    bio: ['DJ and producer based in Madrid. She began her journey in 2018 in Bali, Indonesia — the birthplace of her artistic name. Quickly earned a place among Madrid\'s most recognized emerging talents.',
+    name: 'TERI MAKASIH', role: 'Artist  Systolic Records',
+    bio: ['DJ and producer based in Madrid. She began her journey in 2018 in Bali, Indonesia, the birthplace of her artistic name. Quickly earned a place among Madrid\'s most recognized emerging talents.',
           'International expansion since 2022 across Spain, Portugal, Italy, Belgium, and UAE. Stages shared with Fernanda Martins, Under Black Helmet, Perc, and others.',
           'Current project: Hard Industrial, Rawstyle, Hardstyle, Hardcore, Metalcore, and Rap fused into a boundary-defying sound. Art that transcends trends.'],
-    quote: '"The only true limits are those we impose on ourselves."',
     tags: ['Hardcore', 'Industrial', 'Hardstyle', 'Madrid', 'Bali', 'Concrete Berlin']
   },
   whitespirit: {
-    name: 'WHITE SPIRIT', role: 'Artist — Schranz',
-    bio: ['DJ and producer based in the Netherlands. Old-school Schranz elements fused with modern production — always leaving room for melody and catchy detail.',
-          'Rather than following a fixed formula, White Spirit gives Schranz his own twist — balancing raw energy with musical expression.',
+    name: 'WHITE SPIRIT', role: 'Artist  Systolic Records',
+    bio: ['DJ and producer based in the Netherlands. Old-school Schranz elements fused with modern production, always leaving room for melody and catchy detail.',
+          'Rather than following a fixed formula, White Spirit gives Schranz his own twist, balancing raw energy with musical expression.',
           'Being part of Systolic Records is meaningful to him. A place where he felt understood and found people who believe in his sound.'],
-    quote: '"Where creativity, intensity and melody converge."',
     tags: ['Schranz', 'Netherlands', 'Old-school', 'Melodic']
   }
 };
@@ -326,7 +295,6 @@ function openBio(id) {
   document.getElementById('bio-name').textContent = a.name;
   document.getElementById('bio-role').textContent = a.role;
   document.getElementById('bio-body').innerHTML = a.bio.map(p => '<p>' + p + '</p>').join('');
-  document.getElementById('bio-quote').textContent = a.quote;
   document.getElementById('bio-tags').innerHTML = a.tags.map(t => '<span class="bio-tag">' + t + '</span>').join('');
   overlay.classList.add('open');
 }
