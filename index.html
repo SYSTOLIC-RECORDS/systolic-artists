@@ -105,8 +105,16 @@ html, body {
   font-size: 8px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(240,237,232,0.3);
-  margin-top: 0.25rem;
+  color: rgba(240,237,232,0.45);
+  margin-top: 0.2rem;
+}
+
+.card-label {
+  font-size: 7px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: rgba(232,0,13,0.35);
+  margin-top: 0.5rem;
 }
 
 /* BIO OVERLAY */
@@ -199,7 +207,8 @@ html, body {
     <div class="card-inner">
       <div class="card-num">01</div>
       <div class="card-name">GATNAU</div>
-      <div class="card-genre">Schranz  Madrid</div>
+      <div class="card-genre">Schranz</div>
+      <div class="card-label">Systolic Records</div>
     </div>
   </div>
 
@@ -209,7 +218,8 @@ html, body {
     <div class="card-inner">
       <div class="card-num">02</div>
       <div class="card-name">DREY</div>
-      <div class="card-genre">Schranz  Hard Techno  Madrid</div>
+      <div class="card-genre">Schranz / Hard Techno</div>
+      <div class="card-label">Systolic Records</div>
     </div>
   </div>
 
@@ -219,7 +229,8 @@ html, body {
     <div class="card-inner">
       <div class="card-num">03</div>
       <div class="card-name">TERI MAKASIH</div>
-      <div class="card-genre">Hard Industrial  Hardcore  Madrid</div>
+      <div class="card-genre">Hard Industrial / Hardcore</div>
+      <div class="card-label">Systolic Records</div>
     </div>
   </div>
 
@@ -229,7 +240,8 @@ html, body {
     <div class="card-inner">
       <div class="card-num">04</div>
       <div class="card-name">WHITE SPIRIT</div>
-      <div class="card-genre">Emotional  Melodic Schranz  Netherlands</div>
+      <div class="card-genre">Emotional / Melodic Schranz</div>
+      <div class="card-label">Systolic Records</div>
     </div>
   </div>
 
@@ -251,15 +263,15 @@ const ARTISTS = {
     name: 'GATNAU', role: 'Artist  Systolic Records',
     bio: ['Based in Madrid, he is the creator and driving force behind Systolic Records, a project born from the need to push beyond the boundaries of conventional hard techno.',
           'His natural territory: Schranz at 160 BPM. Kick drums, rhythmic pressure, hypnosis. His musical narrative is built on gradual aggression, from subtle intensity to total release.',
-          'His track "Testing" reached the Beatport Top 100. Throughout 2026, a massive wave of exclusive content, sets loaded with unreleased tracks and a direct connection with the dancefloor.'],
-    tags: ['Schranz', '160 BPM', 'Madrid', 'Beatport Top 100']
+          'Throughout 2026, a massive wave of exclusive content, sets loaded with unreleased tracks and a direct connection with the dancefloor.'],
+    tags: ['Schranz', '160 BPM', 'Madrid', 'Fabrik', 'Code', 'Elrow']
   },
   drey: {
     name: 'DREY', role: 'Artist  Systolic Records',
     bio: ['Madrid-based DJ and producer. In just a few years he established himself on the European circuit with support from Luciid, Shlømo, Vendex, and Svetec.',
-          'Releases on Mad Made, Darkground, DSR Digital, Kube Records, repeatedly reaching the Beatport Top 10. Label Manager at Systolic Records since 2024.',
+          'Releases on Mad Made, Darkground, DSR Digital, Kube Records.',
           'On stage at Fabrik, Sala Sonora, Marmarela, Dvrk Sun, Verknipt Portugal, Komplex. Hard Techno, groove, and old-school Schranz, raw and unapologetically powerful.'],
-    tags: ['Hard Techno', 'Schranz', 'Madrid', 'Beatport Top 10', 'Fabrik']
+    tags: ['Hard Techno', 'Schranz', 'Madrid', 'Fabrik']
   },
   teri: {
     name: 'TERI MAKASIH', role: 'Artist  Systolic Records',
